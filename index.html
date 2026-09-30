@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Eric Wong — Software Engineer</title>
+  <meta name="description" content="Eric Wong — Full-stack software engineer building web apps, business systems, and AI-integrated features." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 font-family=%22monospace%22 font-weight=%22700%22>EW</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+
+  <nav class="nav" aria-label="Primary">
+    <a class="nav-mark" href="#top" aria-label="Home">EW</a>
+    <div class="nav-pill">
+      <a href="#work" data-nav="work">Work</a>
+      <a href="#about" data-nav="about">About</a>
+      <a href="#contact" data-nav="contact">Contact</a>
+    </div>
+    <a class="nav-resume" href="/resume.pdf" target="_blank" rel="noopener">Résumé ↓</a>
+  </nav>
+
+  <main id="top">
+    <section class="hero" id="hero">
+      <canvas class="hero-canvas" id="hero-canvas" aria-hidden="true"></canvas>
+
+      <div class="hero-inner">
+        <div class="avatar-badge" tabindex="0">
+          <span class="avatar-mono">EW</span>
+          <span class="status-dot" aria-hidden="true"></span>
+          <span class="status-tooltip">Available for new projects</span>
+        </div>
+
+        <p class="eyebrow reveal-blur" style="--d:0">Software Engineer · Full-Stack &amp; AI Integration</p>
+
+        <h1 class="hero-title">
+          <span class="line reveal-blur" style="--d:1">Building the software</span>
+          <span class="line line-italic reveal-blur" style="--d:2">real businesses <em>run on.</em></span>
+        </h1>
+
+        <p class="hero-sub reveal-blur" style="--d:3">
+          4 years shipping web apps, business systems, and AI-integrated features — from
+          marketplaces and healthcare ERPs to public transit and warehouse ops.
+        </p>
+
+        <div class="hero-cta reveal-blur" style="--d:4">
+          <a class="btn btn-primary" href="#work">See the work</a>
+          <a class="btn btn-ghost" href="#contact">Say hello</a>
+        </div>
+      </div>
+
+      <a class="scroll-hint" href="#work" aria-label="Scroll to work">
+        <span></span>
+      </a>
+    </section>
+
+    <section class="section" id="work">
+      <header class="section-head">
+        <p class="eyebrow">Selected Work</p>
+        <h2>Things I've <em>built.</em></h2>
+        <p class="section-sub">Five projects that show the range — commerce, education, healthcare, logistics, and AI tooling.</p>
+      </header>
+
+      <div class="project-grid" id="project-grid"></div>
+    </section>
+
+    <section class="section section-tight" id="ai">
+      <header class="section-head">
+        <p class="eyebrow">AI &amp; Automation</p>
+        <h2>Five shipped <em>AI features.</em></h2>
+        <p class="section-sub">Two production chatbots, a RAG docs assistant, a data-automation tool, and a published SEO pipeline.</p>
+      </header>
+
+      <div class="ai-grid" id="ai-grid"></div>
+    </section>
+
+    <section class="section section-tight" id="more-work">
+      <header class="section-head">
+        <p class="eyebrow">More Work</p>
+        <h2>Also <em>shipped.</em></h2>
+      </header>
+
+      <ul class="work-list" id="work-list"></ul>
+    </section>
+
+    <section class="section" id="about">
+      <header class="section-head">
+        <p class="eyebrow">About</p>
+        <h2>My cup of <em>tea.</em></h2>
+      </header>
+
+      <div class="about-grid">
+        <div class="about-copy">
+          <p>
+            I build the operational software real businesses run on day to day — marketplaces,
+            booking platforms, logistics tools, and transit apps — across web and mobile.
+          </p>
+          <p>
+            Currently Head of IT &amp; Digital at Grateful Healthcare, leading internal ERP and
+            web systems for a 5-branch clinic group. Recent contract work integrated AI
+            capabilities into a university learning-management system and accounting workflows
+            for a Hong Kong-based company. Comfortable owning a project end to end — frontend,
+            backend, database design, deployment, integrations, and technical coordination.
+          </p>
+
+          <div class="timeline">
+            <div class="timeline-item">
+              <p class="timeline-role">Head of IT &amp; Digital / Software Engineer</p>
+              <p class="timeline-meta">Grateful Healthcare · Aug 2024 — Present</p>
+            </div>
+            <div class="timeline-item">
+              <p class="timeline-role">Software Engineer (Contract)</p>
+              <p class="timeline-meta">React Digi Limited · 3-month contract, 2026</p>
+            </div>
+            <div class="timeline-item">
+              <p class="timeline-role">Full Stack Developer</p>
+              <p class="timeline-meta">Intuitive Systems · Sep 2022 — Jul 2024</p>
+            </div>
+            <div class="timeline-item">
+              <p class="timeline-role">B.CompSci, Major in Artificial Intelligence</p>
+              <p class="timeline-meta">Swinburne University of Technology Sarawak · 2019 — 2022</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-stack">
+          <p class="stack-label">Languages</p>
+          <div class="chips">
+            <span class="chip">JavaScript</span><span class="chip">TypeScript</span><span class="chip">Python</span><span class="chip">SQL</span><span class="chip">Dart</span><span class="chip">PHP</span><span class="chip">Java</span>
+          </div>
+          <p class="stack-label">Frontend</p>
+          <div class="chips">
+            <span class="chip">React</span><span class="chip">Next.js</span><span class="chip">Vue.js</span><span class="chip">Angular</span><span class="chip">Tailwind CSS</span>
+          </div>
+          <p class="stack-label">Backend &amp; Data</p>
+          <div class="chips">
+            <span class="chip">Node.js</span><span class="chip">Express.js</span><span class="chip">REST APIs</span><span class="chip">PostgreSQL</span><span class="chip">MySQL</span><span class="chip">Supabase</span>
+          </div>
+          <p class="stack-label">AI &amp; Integration</p>
+          <div class="chips">
+            <span class="chip chip-accent">LLM / AI Integration</span><span class="chip chip-accent">AI APIs</span><span class="chip chip-accent">AI-assisted Dev</span>
+          </div>
+          <p class="stack-label">Cloud, Mobile &amp; Tools</p>
+          <div class="chips">
+            <span class="chip">AWS</span><span class="chip">Linux/Ubuntu</span><span class="chip">Docker/Portainer</span><span class="chip">Railway</span><span class="chip">Flutter</span><span class="chip">React Native</span><span class="chip">Git</span><span class="chip">Figma</span><span class="chip">Claude Code</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contact">
+      <div class="contact-card">
+        <div class="contact-copy">
+          <p class="eyebrow eyebrow-light">Contact</p>
+          <h2 class="contact-title">Let's <em>talk.</em></h2>
+          <p class="contact-sub">Have a project, a role, or just want to say hi? I read every message.</p>
+
+          <div class="contact-links">
+            <a href="mailto:ericwong_0530@hotmail.com">ericwong_0530@hotmail.com</a>
+            <a href="https://www.linkedin.com/in/ericw53/" target="_blank" rel="noopener">linkedin.com/in/ericw53</a>
+            <a href="https://github.com/ew53" target="_blank" rel="noopener">github.com/ew53</a>
+          </div>
+        </div>
+
+        <form class="contact-form" id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <label class="field">
+            <span>Your name</span>
+            <input type="text" name="name" placeholder="Jane Doe" required />
+          </label>
+          <label class="field">
+            <span>Your email</span>
+            <input type="email" name="email" placeholder="jane@company.com" required />
+          </label>
+
+          <div class="field">
+            <span>What brings you here?</span>
+            <div class="chip-select" id="chip-select">
+              <button type="button" class="chip-option is-active" data-value="A project">A project</button>
+              <button type="button" class="chip-option" data-value="A full-time role">A full-time role</button>
+              <button type="button" class="chip-option" data-value="Something else">Something else</button>
+            </div>
+            <input type="hidden" name="reason" id="reason-input" value="A project" />
+          </div>
+
+          <label class="field">
+            <span>Message</span>
+            <textarea name="message" rows="4" placeholder="Tell me a little about it…" required></textarea>
+          </label>
+
+          <button type="submit" class="btn btn-primary btn-block">Send it →</button>
+          <p class="form-note" id="form-note" hidden>Thanks — I'll get back to you soon.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 Eric Wong. Built with Vite, TypeScript &amp; Three.js.</p>
+  </footer>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
