@@ -139,11 +139,17 @@ em {
   right: 0;
   z-index: 100;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 8px;
   max-width: var(--page-max);
   margin: 0 auto;
   padding: 0 24px;
+}
+
+.nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .nav-mark {
@@ -211,19 +217,13 @@ em {
   }
 }
 
-.nav-right {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 8px;
-}
-
 .nav-clock {
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.03em;
   color: var(--ink-faint);
   margin: 0;
+  text-align: right;
   white-space: nowrap;
 }
 
