@@ -21,6 +21,12 @@ export interface ListProject {
   description: string;
 }
 
+export interface ShowcaseImage {
+  project: string;
+  label: string;
+  image: string;
+}
+
 export const flagshipProjects: FlagshipProject[] = [
   {
     domain: "E-Commerce",
@@ -28,7 +34,7 @@ export const flagshipProjects: FlagshipProject[] = [
     description:
       "Multi-vendor marketplace for eco-friendly products, built for the Malaysian market. Lead engineer, 1,195+ commits — admin and vendor portals, plus two in-product AI assistants.",
     tech: ["React.js", "Next.js", "Supabase", "Railway"],
-    image: "/projects/plixstar.jpg",
+    image: "/projects/plixstar/home.png",
   },
   {
     domain: "EdTech",
@@ -36,7 +42,7 @@ export const flagshipProjects: FlagshipProject[] = [
     description:
       "Web-first school communication and management platform for Malaysian schools. Lead engineer, 475+ commits. In active development.",
     tech: ["React.js", "Next.js", "MySQL", "AWS", "Portainer"],
-    image: "/projects/school4me.jpg",
+    image: "/projects/school4me/dashboard.png",
   },
   {
     domain: "Healthcare",
@@ -44,7 +50,7 @@ export const flagshipProjects: FlagshipProject[] = [
     description:
       "Marketing and booking site for a 5-branch scoliosis treatment clinic across Malaysia, paired with an internal staff ERP tool I built and now lead as Head of IT.",
     tech: ["React.js", "Tailwind CSS", "Node.js", "MySQL"],
-    image: "/projects/grateful-healthcare.jpg",
+    image: "/projects/gratefulhealthcarewebsite/home.png",
   },
   {
     domain: "Logistics",
@@ -52,7 +58,7 @@ export const flagshipProjects: FlagshipProject[] = [
     description:
       "Internal warehouse operations platform built around an AI-assisted data importer that maps messy spreadsheet columns onto system fields, plus a companion Flutter sales app.",
     tech: ["React", "Node.js", "Express.js", "Flutter", "Ubuntu Linux"],
-    image: "/projects/warehouse-ms.jpg",
+    image: "/projects/warehousemanagement/dashboard.png",
   },
   {
     domain: "AI Tooling",
@@ -62,6 +68,28 @@ export const flagshipProjects: FlagshipProject[] = [
     tech: ["Next.js", "Google Gemini API", "Node.js"],
     image: "/projects/supertools.jpg",
   },
+];
+
+export const showcaseImages: ShowcaseImage[] = [
+  { project: "Plixstar", label: "Storefront", image: "/projects/plixstar/home.png" },
+  { project: "Bus MY Sarawak", label: "Live Bus Tracking", image: "/projects/busmysarawak/livemaptrackbusmy.png" },
+  { project: "Salesman Tracker", label: "Salesman Home", image: "/projects/salesmantracker/salesmanhome.png" },
+  { project: "School4me", label: "Admin Dashboard", image: "/projects/school4me/dashboard.png" },
+  { project: "Grateful Healthcare", label: "Clinic Website", image: "/projects/gratefulhealthcarewebsite/home.png" },
+  { project: "Plixstar", label: "Vendor Portal", image: "/projects/plixstar/vendor.png" },
+  { project: "Warehouse MS", label: "Dashboard", image: "/projects/warehousemanagement/dashboard.png" },
+  { project: "Bus MY Sarawak", label: "Oyen — AI Travel Assistant", image: "/projects/busmysarawak/oyen.png" },
+  { project: "Salesman Tracker", label: "Admin Live Map", image: "/projects/salesmantracker/adminlivemap.png" },
+  { project: "Healthcare ERP", label: "Internal Dashboard", image: "/projects/healthcareerp/dashboard.png" },
+  { project: "Plixstar", label: "Shop", image: "/projects/plixstar/shop.png" },
+  { project: "School4me", label: "Homework Module", image: "/projects/school4me/homework.png" },
+  { project: "Salesman Tracker", label: "Pharmacy Check-in", image: "/projects/salesmantracker/checkin.png" },
+  { project: "Warehouse MS", label: "AI Report Helper", image: "/projects/warehousemanagement/aireporthelper.png" },
+  { project: "Bus MY Sarawak", label: "Trip Planner", image: "/projects/busmysarawak/planner.png" },
+  { project: "Plixstar", label: "Admin Dashboard", image: "/projects/plixstar/admin.png" },
+  { project: "Salesman Tracker", label: "Visit Plans", image: "/projects/salesmantracker/plans.png" },
+  { project: "Bus MY Sarawak", label: "Route Finder", image: "/projects/busmysarawak/routefind.png" },
+  { project: "Salesman Tracker", label: "New Pre-Call Plan", image: "/projects/salesmantracker/addplans.png" },
 ];
 
 export const aiHighlights: AiHighlight[] = [

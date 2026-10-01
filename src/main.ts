@@ -1,11 +1,32 @@
 import "./style.css";
 import { initHeroScene } from "./three/hero-scene";
-import { flagshipProjects, aiHighlights, moreProjects } from "./data/projects";
+import { flagshipProjects, showcaseImages, aiHighlights, moreProjects } from "./data/projects";
 
-/* ---------- Hero 3D scene ---------- */
+/* ---------- Hero 3D scene: walkable world ---------- */
 const heroCanvas = document.getElementById("hero-canvas") as HTMLCanvasElement | null;
 if (heroCanvas) {
-  initHeroScene(heroCanvas);
+  const heroScene = initHeroScene(heroCanvas);
+  const exploreHint = document.getElementById("explore-hint");
+
+  heroScene.onFirstMove(() => {
+    exploreHint?.classList.add("is-hidden");
+  });
+
+  const dpad = document.getElementById("dpad");
+  if (dpad) {
+    dpad.querySelectorAll<HTMLButtonElement>(".dpad-btn").forEach((btn) => {
+      const dir = btn.dataset.dir as "up" | "down" | "left" | "right";
+      const press = (e: Event) => {
+        e.preventDefault();
+        heroScene.setDirection(dir, true);
+      };
+      const release = () => heroScene.setDirection(dir, false);
+      btn.addEventListener("pointerdown", press);
+      btn.addEventListener("pointerup", release);
+      btn.addEventListener("pointerleave", release);
+      btn.addEventListener("pointercancel", release);
+    });
+  }
 }
 
 /* ---------- Render project grid ---------- */
@@ -29,6 +50,111 @@ if (projectGrid) {
       </article>`
     )
     .join("");
+}
+
+/* ---------- Render + wire up the auto-scrolling, draggable showcase strip ---------- */
+const dragTrack = document.getElementById("drag-track");
+const dragHint = document.getElementById("drag-hint");
+if (dragTrack) {
+  const track = dragTrack;
+
+  const cardHtml = (item: (typeof showcaseImages)[number]) => `
+      <div class="drag-card">
+        <div class="drag-card-media">
+          <img src="${item.image}" alt="${item.project} — ${item.label}" loading="lazy" draggable="false" />
+        </div>
+        <div class="drag-card-label">
+          <span>${item.project}</span>
+          <span>${item.label}</span>
+        </div>
+      </div>`;
+
+  // Render the list twice back-to-back so we can loop seamlessly: once the
+  // scroll position passes the first copy, we jump back by exactly its width.
+  track.innerHTML = showcaseImages.map(cardHtml).join("") + showcaseImages.map(cardHtml).join("");
+
+  let isDown = false;
+  let isHovering = false;
+  let startX = 0;
+  let startScroll = 0;
+  let dismissedHint = false;
+  let resumeAt = 0;
+  const AUTO_SPEED = 0.45; // px per frame
+  const RESUME_DELAY = 1500; // ms after releasing a drag before auto-scroll resumes
+
+  function dismissHint() {
+    if (dismissedHint) return;
+    dismissedHint = true;
+    dragHint?.classList.add("is-hidden");
+  }
+
+  function wrapScrollFromDom() {
+    const halfWidth = track.scrollWidth / 2;
+    if (track.scrollLeft >= halfWidth) {
+      track.scrollLeft -= halfWidth;
+    } else if (track.scrollLeft < 0) {
+      track.scrollLeft += halfWidth;
+    }
+  }
+
+  track.addEventListener("pointerdown", (e) => {
+    isDown = true;
+    track.classList.add("is-dragging");
+    startX = e.clientX;
+    startScroll = track.scrollLeft;
+    track.setPointerCapture(e.pointerId);
+  });
+
+  track.addEventListener("pointermove", (e) => {
+    if (!isDown) return;
+    const dx = e.clientX - startX;
+    if (Math.abs(dx) > 4) dismissHint();
+    track.scrollLeft = startScroll - dx;
+  });
+
+  function endDrag() {
+    if (!isDown) return;
+    isDown = false;
+    track.classList.remove("is-dragging");
+    resumeAt = performance.now() + RESUME_DELAY;
+  }
+  track.addEventListener("pointerup", endDrag);
+  track.addEventListener("pointerleave", () => {
+    isHovering = false;
+    endDrag();
+  });
+  track.addEventListener("pointerenter", () => {
+    isHovering = true;
+  });
+  track.addEventListener("scroll", dismissHint, { passive: true });
+
+  const reduceMotionForStrip = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // scrollLeft only stores whole pixels, so adding a sub-pixel AUTO_SPEED
+  // straight to it (then reading it back) never accumulates — it rounds
+  // back to the same integer every frame. Keep the running total as a
+  // plain JS float instead, and never read it back out of the DOM while
+  // auto-scrolling (only while paused/user-controlled, where deltas are
+  // already whole pixels from pointer movement).
+  let scrollAccum = track.scrollLeft;
+
+  function autoScrollLoop() {
+    requestAnimationFrame(autoScrollLoop);
+    if (reduceMotionForStrip) return;
+
+    if (isDown || isHovering || performance.now() < resumeAt) {
+      wrapScrollFromDom();
+      scrollAccum = track.scrollLeft;
+      return;
+    }
+
+    scrollAccum += AUTO_SPEED;
+    const halfWidth = track.scrollWidth / 2;
+    if (scrollAccum >= halfWidth) scrollAccum -= halfWidth;
+    else if (scrollAccum < 0) scrollAccum += halfWidth;
+    track.scrollLeft = scrollAccum;
+  }
+  requestAnimationFrame(autoScrollLoop);
 }
 
 /* ---------- Render AI highlights ---------- */
@@ -73,6 +199,21 @@ if (workList) {
     .join("");
 }
 
+/* ---------- Avatar icon cluster (tap-to-toggle for touch) ---------- */
+const avatarCluster = document.getElementById("avatar-cluster");
+if (avatarCluster) {
+  const avatarBadge = avatarCluster.querySelector<HTMLElement>(".avatar-badge");
+  avatarBadge?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    avatarCluster.classList.toggle("is-open");
+  });
+  document.addEventListener("click", (e) => {
+    if (!avatarCluster.contains(e.target as Node)) {
+      avatarCluster.classList.remove("is-open");
+    }
+  });
+}
+
 /* ---------- Custom cursor ---------- */
 const cursorDot = document.querySelector<HTMLElement>(".cursor-dot");
 const cursorRing = document.querySelector<HTMLElement>(".cursor-ring");
@@ -103,7 +244,7 @@ if (cursorDot && cursorRing && !reduceMotion && hasFinePointer) {
   }
   loop();
 
-  const interactiveSelector = "a, button, .work-row, .project-card, input, textarea, .avatar-badge";
+  const interactiveSelector = "a, button, .work-row, .project-card, input, textarea, .avatar-cluster";
   document.addEventListener("pointerover", (e) => {
     const target = (e.target as HTMLElement).closest(interactiveSelector);
     cursorRing.classList.toggle("is-active", !!target);
