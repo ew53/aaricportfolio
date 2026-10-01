@@ -2,6 +2,22 @@ import "./style.css";
 import { initHeroScene } from "./three/hero-scene";
 import { flagshipProjects, showcaseImages, aiHighlights, moreProjects } from "./data/projects";
 
+/* ---------- Live Kuching clock ---------- */
+const clockTime = document.getElementById("nav-clock-time");
+if (clockTime) {
+  const formatter = new Intl.DateTimeFormat("en-US", {
+    timeZone: "Asia/Kuching",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  });
+  const updateClock = () => {
+    clockTime.textContent = `${formatter.format(new Date())} MYT`;
+  };
+  updateClock();
+  setInterval(updateClock, 15_000);
+}
+
 /* ---------- Hero 3D scene: walkable world ---------- */
 const heroCanvas = document.getElementById("hero-canvas") as HTMLCanvasElement | null;
 if (heroCanvas) {
